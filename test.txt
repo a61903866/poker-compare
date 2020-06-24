@@ -1,0 +1,149 @@
+'''sort测试'''
+# Black = '2H 3D 5S 9C KD'
+Black = '2C 2H 3S 3C 4H'
+# White = '2C 3H 4S 8C AH'
+White = '2C 2H 3S 4C 4H'
+black = Black.split(' ')
+white = White.split(' ')
+'''同花测试'''
+# result = [0, 0]
+# bc = black[0][1]
+# wc = white[0][1]
+# for i in black:
+#     if bc != i[1]:
+#         break
+# else:
+#     result[0] = 1
+# for i in white:
+#     if bc != i[1]:
+#         break
+# else:
+#     result[1] = 1
+# print(result)
+'''顺子测试'''
+# result = [0, 0]
+# bOrder = []
+# wOrder = []
+# for i in black:
+#     bOrder.append(i[0])
+# for i in white:
+#     wOrder.append(i[0])
+# print(bOrder)
+# print(wOrder)
+# rule = {'2': 0, '3': 1, '4': 2, '5': 3, '6': 4, '7': 5, '8': 6, '9': 7, 'T': 8, 'J': 9, 'Q': 10, 'K': 11, 'A': 12}
+# listbOrder = sorted(bOrder, key=lambda x: rule[x])
+# listwOrder = sorted(wOrder, key=lambda x: rule[x])
+# print(listbOrder)
+# print(listwOrder)
+# strOrder = '23456789TJQKA'
+# strbOrder = ''.join(listbOrder)
+# strwOrder = ''.join(listwOrder)
+# if strbOrder in strOrder:
+#     result[0] = 1
+# if strwOrder in strOrder:
+#     result[1] = 1
+# print(result)
+'''同花顺测试'''
+# result = [0, 0]
+# result1 = [0, 1]
+# result2 = [1, 0]
+# if result1[0] and result2[0]:
+#     result[0] = 1
+# if result1[1] and result2[1]:
+#     result[1] = 1
+# print(result)
+'''三条测试'''
+# result = [0, 0]
+# bOrder = []
+# wOrder = []
+# tmp = []
+# for i in black:
+#     bOrder.append(i[0])
+# for i in white:
+#     wOrder.append(i[0])
+# list_input = list(bOrder)
+# for i in range(len(list_input)):
+#     tmp.append(list_input.count(list_input[i]))
+# list_max = max(tmp)
+# if list_max >= 3:
+#     result[0] = 1
+#
+# tmp = []
+# list_input = list(wOrder)
+# for i in range(len(list_input)):
+#     tmp.append(list_input.count(list_input[i]))
+# list_max = max(tmp)
+# if list_max >= 3:
+#     result[1] = 1
+# print(result)
+'''对子测试'''
+# result = [0, 0]
+# bOrder = []
+# wOrder = []
+# tmp = []
+# for i in black:
+#     bOrder.append(i[0])
+# for i in white:
+#     wOrder.append(i[0])
+# list_input = list(bOrder)
+# for i in range(len(list_input)):
+#     tmp.append(list_input.count(list_input[i]))
+# list_max = max(tmp)
+# if list_max == 2:
+#     result[0] = 1
+#
+# tmp = []
+# list_input = list(wOrder)
+# for i in range(len(list_input)):
+#     tmp.append(list_input.count(list_input[i]))
+# list_max = max(tmp)
+# if list_max == 2:
+#     result[1] = 1
+# print(result)
+'''两对测试'''
+# result = [0, 0]
+# bOrder = []
+# wOrder = []
+# tmp = []
+# for i in black:
+#     bOrder.append(i[0])
+# for i in white:
+#     wOrder.append(i[0])
+# list_input = list(bOrder)
+# for i in range(len(list_input)):
+#     tmp.append(list_input.count(list_input[i]))
+# list_max = max(tmp)
+# for i in range(len(list_input)):
+#     if list_max != tmp[i]:
+#         continue
+#     str_max = list_input[i]
+# tmp = []
+# if list_max == 2:
+#     for i in range(list_max):
+#             bOrder.remove(str_max)
+#     list_input = list(bOrder)
+#     for i in range(len(list_input)):
+#         tmp.append(list_input.count(list_input[i]))
+#     list_max = max(tmp)
+#     if list_max == 2:
+#         result[0] = 1
+# tmp = []
+# list_input = list(wOrder)
+# for i in range(len(list_input)):
+#     tmp.append(list_input.count(list_input[i]))
+# list_max = max(tmp)
+# for i in range(len(list_input)):
+#     if list_max != tmp[i]:
+#         continue
+#     str_max = list_input[i]
+# tmp = []
+# if list_max == 2:
+#     for i in range(list_max):
+#         wOrder.remove(str_max)
+#     list_input = list(wOrder)
+#     for i in range(len(list_input)):
+#         tmp.append(list_input.count(list_input[i]))
+#     list_max = max(tmp)
+#     if list_max == 2:
+#         result[1] = 1
+# print(result)

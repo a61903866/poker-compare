@@ -1,0 +1,258 @@
+def sort(Black, White):
+    black = Black.split(' ')
+    white = White.split(' ')
+    return black, white
+
+
+def tongHuaShun(black, white):
+    result = [0, 0]
+    result1 = tongHua(black, white)
+    result2 = shunZi(black, white)
+    if result1[0] and result2[0]:
+        result[0] = 1
+    if result1[1] and result2[1]:
+        result[1] = 1
+    return result
+
+
+def tongHua(black, white):
+    result = [0, 0]
+    bc = black[0][1]
+    wc = white[0][1]
+    for i in black:
+        if bc != i[1]:
+            break
+    else:
+        result[0] = 1
+    for i in white:
+        if wc != i[1]:
+            break
+    else:
+        result[1] = 1
+    return result
+
+
+def shunZi(black, white):
+    result = [0, 0]
+    bOrder = []
+    wOrder = []
+    for i in black:
+        bOrder.append(i[0])
+    for i in white:
+        wOrder.append(i[0])
+    rule = {'2': 0, '3': 1, '4': 2, '5': 3, '6': 4, '7': 5, '8': 6, '9': 7, 'T': 8, 'J': 9, 'Q': 10, 'K': 11, 'A': 12}
+    listbOrder = sorted(bOrder, key=lambda x: rule[x])
+    listwOrder = sorted(wOrder, key=lambda x: rule[x])
+    strOrder = '23456789TJQKA'
+    strbOrder = ''.join(listbOrder)
+    strwOrder = ''.join(listwOrder)
+    if strbOrder in strOrder:
+        result[0] = 1
+    if strwOrder in strOrder:
+        result[1] = 1
+    return result
+
+
+def sanTiao(black, white):
+    result = [0, 0]
+    bOrder = []
+    wOrder = []
+    tmp = []
+    for i in black:
+        bOrder.append(i[0])
+    for i in white:
+        wOrder.append(i[0])
+    list_input = list(bOrder)
+    for i in range(len(list_input)):
+        tmp.append(list_input.count(list_input[i]))
+    list_max = max(tmp)
+    if list_max >= 3:
+        result[0] = 1
+
+    tmp = []
+    list_input = list(wOrder)
+    for i in range(len(list_input)):
+        tmp.append(list_input.count(list_input[i]))
+    list_max = max(tmp)
+    if list_max >= 3:
+        result[1] = 1
+    return result
+
+
+def liangDui(black, white):
+    result = [0, 0]
+    bOrder = []
+    wOrder = []
+    tmp = []
+    for i in black:
+        bOrder.append(i[0])
+    for i in white:
+        wOrder.append(i[0])
+    list_input = list(bOrder)
+    for i in range(len(list_input)):
+        tmp.append(list_input.count(list_input[i]))
+    list_max = max(tmp)
+    for i in range(len(list_input)):
+        if list_max != tmp[i]:
+            continue
+        str_max = list_input[i]
+    tmp = []
+    if list_max == 2:
+        for i in range(list_max):
+            bOrder.remove(str_max)
+        list_input = list(bOrder)
+        for i in range(len(list_input)):
+            tmp.append(list_input.count(list_input[i]))
+        list_max = max(tmp)
+        if list_max == 2:
+            result[0] = 1
+    tmp = []
+    list_input = list(wOrder)
+    for i in range(len(list_input)):
+        tmp.append(list_input.count(list_input[i]))
+    list_max = max(tmp)
+    for i in range(len(list_input)):
+        if list_max != tmp[i]:
+            continue
+        str_max = list_input[i]
+    tmp = []
+    if list_max == 2:
+        for i in range(list_max):
+            wOrder.remove(str_max)
+        list_input = list(wOrder)
+        for i in range(len(list_input)):
+            tmp.append(list_input.count(list_input[i]))
+        list_max = max(tmp)
+        if list_max == 2:
+            result[1] = 1
+    return result
+
+
+def duiZi(black, white):
+    result = [0, 0]
+    bOrder = []
+    wOrder = []
+    tmp = []
+    for i in black:
+        bOrder.append(i[0])
+    for i in white:
+        wOrder.append(i[0])
+    list_input = list(bOrder)
+    for i in range(len(list_input)):
+        tmp.append(list_input.count(list_input[i]))
+    list_max = max(tmp)
+    if list_max == 2:
+        result[0] = 1
+
+    tmp = []
+    list_input = list(wOrder)
+    for i in range(len(list_input)):
+        tmp.append(list_input.count(list_input[i]))
+    list_max = max(tmp)
+    if list_max == 2:
+        result[1] = 1
+    return result
+
+
+def sanPai(black, white):
+    result = [0, 0]
+    result1 = tongHua(black, white)
+    result2 = shunZi(black, white)
+    result3 = sanTiao(black, white)
+    result4 = liangDui(black, white)
+    result5 = duiZi(black, white)
+    if not (result1[0] or result2[0] or result3[0] or result4[0] or result5[0]):
+        result[0] = 1
+    if not (result1[1] or result2[1] or result3[1] or result4[1] or result5[1]):
+        result[1] = 1
+    return result
+
+
+def compare(black, white, tpyecard):
+    bgoal = 0
+    wgoal = 0
+    goal = 5
+    for i in typeCard:
+        if i[0] == 1:
+            bgoal = goal
+            break
+        else:
+            goal -= 1
+    goal = 5
+    for i in typeCard:
+        if i[1] == 1:
+            wgoal = goal
+            break
+        else:
+            goal -= 1
+    if(bgoal > wgoal):
+        return 0
+    elif(bgoal < wgoal):
+        return 1
+    else:
+        return bigger(black, white)
+
+
+def bigger(black, white):
+    bOrder = []
+    wOrder = []
+    for i in black:
+        bOrder.append(i[0])
+    for i in white:
+        wOrder.append(i[0])
+    rule = {'2': 0, '3': 1, '4': 2, '5': 3, '6': 4, '7': 5, '8': 6, '9': 7, 'T': 8, 'J': 9, 'Q': 10, 'K': 11, 'A': 12}
+    listbOrder = sorted(bOrder, key=lambda x: rule[x])
+    listwOrder = sorted(wOrder, key=lambda x: rule[x])
+    listbOrder.reverse()
+    listwOrder.reverse()
+    orderlist = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
+    if listwOrder[0] <= '9' and listwOrder[0] >= '0' and listbOrder[0] <= '9' and listbOrder[0] >= '0':
+        for i in range(5):
+            if listbOrder[i] > listwOrder[i]:
+                return 0
+            elif listbOrder[i] < listwOrder[i]:
+                return 1
+            else:
+                continue
+    else:
+        for i in range(5):
+            numb = orderlist.index(listbOrder[i])
+            numw = orderlist.index(listwOrder[i])
+            if numb > numw:
+                return 0
+            elif numb < numw:
+                return 1
+            else:
+                continue
+        else:
+            return 2
+
+
+isTongHuaShun = [0, 0]
+isTongHua = [0, 0]
+isShunZi = [0, 0]
+isSanTiao = [0, 0]
+isLiangDui = [0, 0]
+isDuiZi = [0, 0]
+isSanPai = [0, 0]
+
+Black = input("Black:")
+White = input("White:")
+Black, White = sort(Black, White)
+isTongHuaShun = tongHuaShun(Black, White)
+isTongHua = tongHua(Black, White)
+isShunZi = shunZi(Black, White)
+isSanTiao = sanTiao(Black, White)
+isLiangDui = liangDui(Black, White)
+isDuiZi = duiZi(Black, White)
+isSanPai = sanPai(Black, White)
+
+typeCard = [isTongHuaShun, isTongHua, isShunZi, isSanTiao, isLiangDui, isDuiZi, isSanPai]
+winner = compare(Black, White, typeCard)
+
+if(winner == 0):
+    print("Black wins")
+elif(winner == 1):
+    print("White wins")
+elif(winner == 2):
+    print("Tie")
